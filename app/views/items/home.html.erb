@@ -16,7 +16,20 @@
     </div>
     <h2>Upcoming:</h2>
     <div class="months">
-      
+      <%= render 'components/monthly_card',
+        month: Date.today.strftime("%B %Y"),
+        monthly_items: @current_month_items
+      %>
+
+      <%= render 'components/monthly_card',
+        month: Date.today.next_month.strftime("%B %Y"),
+        monthly_items: @next_month_items
+      %>
+
+      <%= render 'components/monthly_card',
+        month: Date.today.next_month(2).strftime("%B %Y"),
+        monthly_items: @next_next_month_items
+      %>
     </div>
   </div>
 </div>
