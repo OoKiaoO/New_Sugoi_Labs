@@ -1,0 +1,24 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+*:focus {
+  outline: none;
+}
+
+.application {
+  display: flex;
+  width: 83%;
+  float: right;
+  padding: 80px 0;
+  background-color: #F9FAFB;
+}
+
+// Graphic Variables
+// @import "config/fonts";
+// @import "config/colors";
+
+// SCSS Partials
+// @import "components/index";
+// @import "pages/index";
