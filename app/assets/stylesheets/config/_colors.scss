@@ -1,0 +1,32 @@
+// Main color scheme variables
+// Fonts
+$off-black: #2F2C2C;
+$main-purple: #5f3cea;
+$pink: #ea3c66;
+
+// Background
+$dash-bg: #E5E5E5;
+
+a:link {
+  color: $main-purple;
+  text-decoration: none;
+}
+
+a:visited {
+  color: $main-purple;
+  text-decoration: none;
+}
+
+a:hover {
+  color: $main-purple;
+  text-decoration: underline;
+}
+
+a:active {
+  color: $pink;
+  text-decoration: underline;
+}
+
+p, span, h1, h2, h3, h4 {
+  color: $off-black;
+}
