@@ -1,0 +1,41 @@
+.navbar {
+  background: white;
+  padding: 10px 10px;
+  display: flex;
+  box-shadow: 0px 3px 10px -10px #262626;
+  position: fixed;
+  width: 100%;
+  z-index: 100;
+}
+
+.nav_links {
+  display: flex;
+  justify-content: right;
+  flex-direction: row;
+  flex-grow: 1;
+  align-items: center;
+  padding-right: 10px;
+
+  li {
+    padding: 0 20px;
+    list-style-type: none;
+
+    a:link {
+      color: black;
+      text-decoration: none;
+    }
+    a:visited {
+      color: black;
+    }
+  }
+}
+
+.nav_logo {
+  background-image: url("logo-nav.png");
+  background-position: center;
+  height: 60px;
+  width: 220px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  margin-left: 10px;
+}
