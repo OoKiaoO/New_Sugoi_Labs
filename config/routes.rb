@@ -10,10 +10,10 @@ Rails.application.routes.draw do
   resources :items do
     resources :item_amounts, only: %i[new create edit update]
 
-    # collection do
-    #   get :expiring_soon
-    #   get :expired
-    # end
+    collection do
+      get :expiring_soon
+      get :expired
+    end
   end
   resources :item_amounts, only: [:destroy]
   root to: 'items#home'
