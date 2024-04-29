@@ -68,13 +68,15 @@ class ItemsController < ApplicationController
 
   def create
     @item = Item.new(item_params)
-    @item.save!
+    # @item.save!
 
-    # if @item.save
-    #   log(@item.id, "Created new item")
-    # end
-
-    redirect_to item_path(@item)
+    if @item.save
+      redirect_to item_path(@item)
+      # log(@item.id, "Created new item")
+    else
+      render :new, status: :unprocessable_entity
+    end
+    # raise
   end
 
   def edit
