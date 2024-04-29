@@ -1,0 +1,49 @@
+<%= form_with model: @item do |f| %>
+  <%= f.text_field :name,
+                    required: true,
+                    label: false,
+                    autofocus: true,
+                    placeholder: "Name - Required",
+                    :class => "new_form_input" %>
+  <%= f.text_field :brand,
+                    required: true,
+                    label: false,
+                    autofocus: true,
+                    placeholder: "Brand - Required",
+                    :class => "new_form_input" %>
+  <%= f.text_field :barcode,
+                    required: true,
+                    label: false,
+                    autofocus: true,
+                    placeholder: "SKU - Required",
+                    :class => "new_form_input" %>
+  <%= f.text_field :secondary_barcode,
+                    required: false,
+                    label: false,
+                    autofocus: true,
+                    placeholder: "Barcode",
+                    :class => "new_form_input" %>
+  <%= f.text_field :retail,
+                    required: false,
+                    label: false,
+                    autofocus: true,
+                    placeholder: "Retail",
+                    :class => "new_form_input" %>
+  <%= f.text_field :location,
+                    required: false,
+                    label: false,
+                    autofocus: true,
+                    placeholder: "Location",
+                    :class => "new_form_input" %>
+  <%= f.select :category,
+                Item::CATEGORIES,
+                required: true,
+                label: false,
+                autofocus: true,
+                include_blank: "Select" %>
+  <%= f.file_field :photo %>
+  <div class="form-action">
+    <%= f.submit 'Save', :class => "login-signup" %>
+    <%= link_to "Cancel", root_path, class: "cancel" %>
+  </div>
+<% end %>

@@ -1,0 +1,274 @@
+.item-page {
+  width: 100%;
+  padding: 25px;
+}
+
+.section {
+  margin-bottom: 20px;
+}
+
+// ITEM HEADER SECTION
+
+.item-header {
+  display: flex;
+  justify-content: space-around;
+  background-color: white;
+  padding: 20px;
+  border-radius: 15px;
+}
+
+.item-header-img {
+  padding: 10px;
+  text-align: center;
+
+  p {
+    margin: 30px;
+    text-decoration: underline;
+    color: #5f3cea;
+  }
+}
+
+.header-img {
+  background-image: url('placeholder.png');
+  width: 300px;
+  height: 250px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
+
+.item-info {
+  flex-grow: 1;
+  padding: 0 30px;
+  
+  h1 {
+    margin: 20px 0;
+  }
+
+  p {
+    padding-bottom: 7px;
+    font-weight: 400;
+  }
+}
+
+.item-info-value {
+  font-weight: 100;
+}
+
+.item-links {
+  display: flex;
+  justify-content: space-between;
+  width: 10%;
+  padding: 5px 20px 0 0;
+}
+
+#item-delete {
+  color: #EA3C66;
+}
+
+// ITEM STOCK SECTION
+
+.no-amounts {
+  padding: 20%;
+  text-align: center;
+}
+
+.item-stock {
+  display: flex;
+  justify-content: space-between;
+  background-color: white;
+  padding: 40px;
+  border-radius: 15px;
+}
+
+.item-stock-info {
+  width: 85%;
+
+  h1 {
+    margin-bottom: 35px;
+  }
+}
+
+// IMPORTANT: display: grid; works exactly like display: flex; and needs to be re-declared on each indvidual container (!!)
+
+.stock-info {
+  display: grid;
+  grid-template-rows: auto;
+  text-align: center;
+}
+
+.stock-info-column-headers {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  border-bottom: 1px solid #777373;
+  padding: 0 40px 10px 40px;
+
+  a {
+    font-weight: 500;
+    color: #2F2C2C;
+  }
+
+  a:hover {
+    color: #5f3cea;
+    text-decoration: none;
+  }
+}
+
+.stock-info-amounts {
+  height: 250px;
+  border-bottom: 1px solid #777373;
+  overflow: scroll;
+};
+
+.stock-info-amount {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  border-bottom: 1px solid lightgray;
+  padding: 10px 0;
+  margin: 0 40px;
+}
+
+.item-stock-graph {
+  width: 55%;
+
+  h1 {
+    margin-bottom: 35px;
+    text-align:right;
+  }
+
+  p {
+    padding-bottom: 20px;
+  }
+}
+
+.stock-graph {
+  margin: 0 15%;
+}
+
+
+// ITEM LOGS SECTION
+
+.item-logs {
+  background-color: white;
+  padding: 40px;
+  border-radius: 15px;
+}
+
+.log-info {
+  display: grid;
+  grid-template-rows: auto;
+  text-align: center;
+  border-bottom: 1px solid #777373;
+}
+
+.log-info-column-headers {
+  display: grid;
+  grid-template-columns: 1fr 1fr 2fr;
+  border-bottom: 1px solid #777373;
+  padding: 40px 40px 10px 40px;
+}
+
+.item-logs-info {
+  h1 {
+    margin-bottom: 35px 0;
+  }
+
+  p {
+    padding: 7px 0;
+  }
+}
+
+.log-action {
+  display: grid;
+  grid-template-columns: 1fr 1fr 2fr;
+  border-bottom: 1px solid lightgray;
+  padding: 10px 0;
+  margin: 0 40px;
+}
+
+.logs {
+  max-height: 300px;
+  overflow: scroll;
+}
+
+// ITEM AMOUNT FORM SECTION
+
+.add-quantity-form {
+  padding: 10px 0 40px 0;
+}
+
+.new-amount-input {
+  border: 1px solid #5f3eac;
+  height: 20px;
+  border-radius: 10px;
+  padding: 5px 10px;
+  font-size: 15px;
+  color: black;
+  font-family: 'Poppins', 'Helvetica', sans-serif;
+  margin-bottom: 10px;
+}
+
+.add-amount {
+  height: 40px;
+  width: 80px;
+  border-radius: 12px;
+  border: none;
+  background-color: #5f3eac;
+  color: white;
+  font-family: 'Poppins', 'Helvetica', sans-serif;
+  font-size: 17px;
+  box-shadow: 0px 3px 10px -3px #262626;
+  transition: background 0.3s ease;
+}
+
+.add-amount:hover {
+  color: white;
+  background-color: #EA3C66;
+}
+
+.new_item_amount {
+  display: flex;
+  justify-content: space-between;
+  align-items:baseline;
+}
+
+// WASTE LOGS SECTION
+
+.waste-log-info-column-headers {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  border-bottom: 1px solid #777373;
+  padding: 40px 40px 10px 40px;
+}
+
+#waste-log-info {
+  margin-bottom: 35px;
+}
+
+.waste-log-action {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  border-bottom: 1px solid lightgray;
+  padding: 10px 0;
+  margin: 0 40px;
+}
+
+.item-waste-chart {
+  width: 100%;
+  height: 500px;
+  margin-top: 40px;
+
+  h1 {
+    margin-bottom: 35px;
+    text-align:right;
+  }
+
+  p {
+    padding-bottom: 20px;
+  }
+}
+
+.expired {
+  height: 300px;
+  overflow: scroll;
+}

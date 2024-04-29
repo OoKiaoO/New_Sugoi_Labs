@@ -1,4 +1,6 @@
 class ItemsController < ApplicationController
+  before_action :set_item, only: [:show, :edit, :update, :destroy] #:show_item_amount
+  
 
   def home
     items = Item.all
@@ -29,70 +31,70 @@ class ItemsController < ApplicationController
     end
   end
 
-  # def show
-  #   @item_amount = ItemAmount.new
-  #   @unchecked_amounts = @item.item_amounts.select {|amount| !amount.checked}
+  def show
+    @item_amount = ItemAmount.new
+    # @unchecked_amounts = @item.item_amounts.select {|amount| !amount.checked}
     
-  #   unless @item.item_amounts.empty?
-  #     if @item.item_amounts.count == 1
-  #       @item_amounts = @item.item_amounts.order(created_at: :desc)
-  #       @data_values = [@item.item_amounts.first.amount]
-  #       @data_keys = ['Expiring next']
-  #     else
-  #       chart_data = get_chart_data
-  #       @data_values = chart_data[:data_values]
-  #       @data_keys = chart_data[:data_keys]
-  #       @exp_amounts = @item.item_amounts.select {|amount| amount.checked}
-  #       @waste_data = get_waste_chart_data(@exp_amounts)
-  #       @data_waste_keys = @waste_data.map {|item| item[:month] }
-  #       @data_waste_values = @waste_data.map {|item| item[:total] }
+    # unless @item.item_amounts.empty?
+    #   if @item.item_amounts.count == 1
+    #     @item_amounts = @item.item_amounts.order(created_at: :desc)
+    #     @data_values = [@item.item_amounts.first.amount]
+    #     @data_keys = ['Expiring next']
+    #   else
+    #     chart_data = get_chart_data
+    #     @data_values = chart_data[:data_values]
+    #     @data_keys = chart_data[:data_keys]
+    #     @exp_amounts = @item.item_amounts.select {|amount| amount.checked}
+    #     @waste_data = get_waste_chart_data(@exp_amounts)
+    #     @data_waste_keys = @waste_data.map {|item| item[:month] }
+    #     @data_waste_values = @waste_data.map {|item| item[:total] }
 
-  #       if params[:option] == 'amount#reload'
-  #         @item_amounts = @item.item_amounts.order(amount: :desc)
-  #       elsif params[:option] == 'exp#reload'
-  #         @item_amounts = @item.item_amounts.order(exp_date: :asc)
-  #       elsif params[:option] == 'remaining'
-  #         @item_amounts = @item.item_amounts.order(exp_date: :asc)
-  #       else
-  #         @item_amounts = @item.item_amounts.order(created_at: :desc)
-  #       end
-  #     end
-  #   end
-  # end
+    #     if params[:option] == 'amount#reload'
+    #       @item_amounts = @item.item_amounts.order(amount: :desc)
+    #     elsif params[:option] == 'exp#reload'
+    #       @item_amounts = @item.item_amounts.order(exp_date: :asc)
+    #     elsif params[:option] == 'remaining'
+    #       @item_amounts = @item.item_amounts.order(exp_date: :asc)
+    #     else
+    #       @item_amounts = @item.item_amounts.order(created_at: :desc)
+    #     end
+    #   end
+    # end
+  end
 
-  # def new
-  #   @item = Item.new
-  # end
+  def new
+    @item = Item.new
+  end
 
-  # def create
-  #   @item = Item.new(item_params)
-  #   @item.save!
+  def create
+    @item = Item.new(item_params)
+    @item.save!
 
-  #   if @item.save
-  #     log(@item.id, "Created new item")
-  #   end
+    # if @item.save
+    #   log(@item.id, "Created new item")
+    # end
 
-  #   redirect_to item_path(@item)
-  # end
+    redirect_to item_path(@item)
+  end
 
-  # def edit
-  # end
+  def edit
+  end
 
-  # def update
-  #   @item.update(item_params)
+  def update
+    @item.update(item_params)
 
-  #   if @item.save
-  #     log(@item.id, "Updated item's info")
-  #   end
+    # if @item.save
+    #   log(@item.id, "Updated item's info")
+    # end
 
-  #   redirect_to item_path(@item)
-  # end
+    redirect_to item_path(@item)
+  end
 
-  # def destroy
-  #   @item.destroy
+  def destroy
+    @item.destroy
 
-  #   redirect_to items_path
-  # end
+    redirect_to items_path
+  end
 
 
   private

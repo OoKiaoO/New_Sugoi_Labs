@@ -15,7 +15,7 @@ class Item < ApplicationRecord
             uniqueness: true, if: :secondary_barcode?
   #  :if => :secondary_barcode?
   validates :category, presence: true, inclusion: { in: CATEGORIES }
-  # :inclusion => { :in => CATEGORIES }
+  validates :retail, numericality: true, allow_nil: true
 
   # include PgSearch::Model
   # pg_search_scope :search_by_all_item_info,

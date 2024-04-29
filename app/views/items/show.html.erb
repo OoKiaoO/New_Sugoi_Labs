@@ -1,0 +1,37 @@
+<div class="item-page">
+  <div class="item-header section">
+    <div class="item-header-img">
+      <div>
+        <% if @item.has_attribute?("photo") %>
+          <%= cl_image_tag @item.photo.key, width: 300, height: 250 %>
+        <% else %>
+          <div class="header-img">
+          </div>
+        <% end %>
+      </div>
+      <p id="reload">Upload Image</p>
+    </div>
+
+    <div class="item-info">
+      <h1><%= @item.name %></h1>
+      <p>SKU: <span class="item-info-value"><%= @item.barcode %></span></p>
+      <p>Barcode: <span class="item-info-value"><%= @item.secondary_barcode %></span></p>
+      <p>Location: <span class="item-info-value"><%= @item.location %></span></p>
+      <p>Brand: <span class="item-info-value"><%= @item.brand %></span></p>
+      <p>Description: <span class="item-info-value"><%= @item.category %></span></p>
+      <p>Retail: $<span class="item-info-value"><%= @item.retail %></span></p>
+      <p>Tags:</p>
+    </div>
+
+    <div class="item-links">
+      <p>Edit</p>
+      <%# <p><%= link_to "Edit", edit_item_path </p> %>
+      <p><%= link_to "Delete",
+            item_path(@item),
+            method: :delete,
+            id: "item-delete",
+            data: { confirm: "Are you sure?" }
+      %></p>
+    </div>
+  </div>
+</div>
