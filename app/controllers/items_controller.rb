@@ -12,20 +12,21 @@ class ItemsController < ApplicationController
   end
 
   def index
+    #TODO: add backup for empty inventory (no items found)
     # TODO: make filters apply to prev. searched query results only, if present
     # add conditional in each filter 
     # @items = params[:filter].present? ? Item.search_by_all_item_info(params[:query]).order(brand: :asc) : ...?
-    # if params[:query].present?
-    #   @items = Item.search_by_all_item_info(params[:query])
-    # elsif params[:filter].present? && params[:filter] == 'brand'
-    #   @items = Item.all.order(brand: :asc)
-    # elsif params[:filter].present? && params[:filter] == 'category'
-    #   @items = Item.all.order(category: :asc)
-    # elsif params[:filter].present? && params[:filter] == 'location'
-    #   @items = Item.all.order(location: :asc)
-    # else
-    #   @items = Item.all.order(name: :asc)
-    # end
+    if params[:query].present?
+      @items = Item.search_by_all_item_info(params[:query])
+    elsif params[:filter].present? && params[:filter] == 'brand'
+      @items = Item.all.order(brand: :asc)
+    elsif params[:filter].present? && params[:filter] == 'category'
+      @items = Item.all.order(category: :asc)
+    elsif params[:filter].present? && params[:filter] == 'location'
+      @items = Item.all.order(location: :asc)
+    else
+      @items = Item.all.order(name: :asc)
+    end
   end
 
   # def show
@@ -99,13 +100,13 @@ class ItemsController < ApplicationController
 
   def item_params
     params.require(:item).permit(:name,
-                                 :brand, 
-                                 :barcode, 
-                                 :secondary_barcode, 
-                                 :description, 
-                                 :category, 
-                                 :location, 
-                                 :retail, 
+                                 :brand,
+                                 :barcode,
+                                 :secondary_barcode,
+                                 :description,
+                                 :category,
+                                 :location,
+                                 :retail,
                                  :photo)
   end
 

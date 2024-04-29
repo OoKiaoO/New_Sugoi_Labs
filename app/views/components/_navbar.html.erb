@@ -3,8 +3,8 @@
   <ul class="nav_links">
     <li>
       <div class="search-bar">
-        <%= simple_form_for :search, url: root_path, method: "GET", html: { class: 'search-form' } do |f| %>
-          <%= f.input :name,
+        <%= form_with url: root_path, method: :get, html: { class: 'search-form' } do |f| %>
+          <%= f.text_field :name,
                       input_html: {value: "", class: "search-input"},
                       label: false,
                       placeholder: "Search items" %>   
@@ -12,11 +12,13 @@
         <% end %>
       </div>
     </li>
-    <li>
-      <%= link_to "Account", user_path(current_user), class: "nav-link" %>
+    <li class="nav-link">
+      Account
+      <%# <%= link_to "Account", user_path(current_user), class: "nav-link" %>
     </li>
-    <li>
-      <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
+    <li class="dropdown-item">
+      Log out
+      <%# <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
       </div>
     </li>
   </ul>
