@@ -85,11 +85,12 @@ class ItemsController < ApplicationController
   def update
     @item.update(item_params)
 
-    # if @item.save
-    #   log(@item.id, "Updated item's info")
-    # end
-
-    redirect_to item_path(@item)
+    if @item.save
+      redirect_to item_path(@item)
+      # log(@item.id, "Updated item's info")
+    else
+      render :new, status: :unprocessable_entity
+    end
   end
 
   def destroy

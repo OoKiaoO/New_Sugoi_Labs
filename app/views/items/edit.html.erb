@@ -6,7 +6,15 @@
       <p>Upload Image</p>
     </div>
     <div class="new-item-form">
+
+      <% if @item.errors.any? %>
+        <% @item.errors.full_messages.each do |message|%>
+          <h3><%= message %>!</h3>
+        <%end%>
+      <%end%>
+
       <%= render "items/item_form" %>
+      
     </div>
   </div>
 </div>
