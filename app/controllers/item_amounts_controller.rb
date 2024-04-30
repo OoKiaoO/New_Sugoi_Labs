@@ -10,6 +10,13 @@ class ItemAmountsController < ApplicationController
     @item_amount = ItemAmount.new(item_amount_params)
     @item_amount.item = @item
 
+    if @item_amount.save!
+      redirect_to item_path(@item)
+      # log(@item.id, "Updated item's info")
+    else
+      render :new, status: :unprocessable_entity
+    end
+
     # respond_to do |format|
     #   if @item_amount.save
     #     log(@item.id,

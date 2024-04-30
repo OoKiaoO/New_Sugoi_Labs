@@ -95,7 +95,7 @@ class ItemsController < ApplicationController
   def destroy
     @item.destroy
 
-    redirect_to items_path
+    redirect_to items_path, status: :see_other
   end
 
   # def expiring_soon

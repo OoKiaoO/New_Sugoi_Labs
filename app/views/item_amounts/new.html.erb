@@ -1,0 +1,51 @@
+<div class="new-bg">
+  <h1>Add a new quantity to <%= @item.name %>:</h1>
+  <div class="new-item-main">
+    <div class="new-item-img-upload item-header-img">
+      <div class="header-img">
+        <div>
+          <% if @item.has_attribute?("photo") %>
+            <%= cl_image_tag @item.photo.key, width: 300, height: 250 %>
+          <% else %>
+            <div class="header-img">
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <div class="new-item-form">
+
+      <% if @item.errors.any? %>
+        <% @item.errors.full_messages.each do |message|%>
+          <h3 id="item-delete"><%= message %>!</h3>
+        <%end%>
+      <%end%>
+
+      <%= form_with model: [@item, @item_amount] do |f| %>
+        <div class="new_item_amount_form">
+          <div class="new_item_amont_inputs">
+            <%= f.label :amount %>
+            <%= f.number_field :amount,
+                              required: true, 
+                              label: false, 
+                              autofocus: true,
+                              placeholder: "10",
+                              :class => 'new_amount_form_input' %>
+            <%= f.label :exp_date %>
+            <%= f.date_field :exp_date,
+                            required: true, 
+                            label: false, 
+                            autofocus: true,
+                            :class => 'new_amount_form_input' %>
+            <% f.check_box :checked, checked: false %>
+            <% f.number_field :amount %>
+          </div>
+          <div class="new_item_amount_submit">
+            <%= f.submit 'Add', :class => 'login-signup' %>
+            <p><%= link_to 'Cancel', items_path %></p>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
