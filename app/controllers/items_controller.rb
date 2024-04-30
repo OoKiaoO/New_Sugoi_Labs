@@ -1,20 +1,19 @@
 class ItemsController < ApplicationController
   before_action :set_item, only: [:show, :edit, :update, :destroy] #:show_item_amount
-  
 
   def home
     items = Item.all
     current_month = Date.today
     next_month = Date.today.next_month
     next_next_month = Date.today.next_month(2)
-    
+
     @current_month_items = get_monthly_items(items, get_monthly_range(current_month))
     @next_month_items = get_monthly_items(items, get_monthly_range(next_month))
     @next_next_month_items = get_monthly_items(items, get_monthly_range(next_next_month))
   end
 
   def index
-    #TODO: add backup for empty inventory (no items found)
+    # TODO: add backup for empty inventory (no items found)
     # TODO: make filters apply to prev. searched query results only, if present
     # add conditional in each filter 
     # @items = params[:filter].present? ? Item.search_by_all_item_info(params[:query]).order(brand: :asc) : ...?

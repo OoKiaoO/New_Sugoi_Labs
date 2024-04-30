@@ -27,9 +27,8 @@
       <p><%= link_to "Edit", edit_item_path %></p>
       <p><%= link_to "Delete",
             item_path(@item),
-            method: :delete,
             id: "item-delete",
-            data: { confirm: "Are you sure?" }
+            data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
       %></p>
     </div>
   </div>
