@@ -32,7 +32,7 @@ class ItemsController < ApplicationController
 
   def show
     @item_amount = ItemAmount.new
-    # @unchecked_amounts = @item.item_amounts.select {|amount| !amount.checked}
+    @unchecked_amounts = @item.item_amounts.select {|amount| !amount.checked}
     
     # unless @item.item_amounts.empty?
     #   if @item.item_amounts.count == 1
@@ -98,6 +98,25 @@ class ItemsController < ApplicationController
     redirect_to items_path
   end
 
+  # def expiring_soon
+  #   items = Item.all
+  #   current_month = Date.today
+  #   next_month = Date.today.next_month
+  #   next_next_month = Date.today.next_month(2)
+
+  #   @current_month_items = get_monthly_items(items, get_monthly_range(current_month))
+  #   @next_month_items = get_monthly_items(items, get_monthly_range(next_month))
+  #   @next_next_month_items = get_monthly_items(items, get_monthly_range(next_next_month))
+
+  #   if params[:start_date].present? && params[:end_date].present?
+  #     range = (params[:start_date]..params[:end_date])
+  #     @filtered_items = get_monthly_items(items, range)
+  #   elsif params[:monthly_items].present?
+  #     @filtered_items = {
+  #       items: params[:monthly_items].map { |item| Item.find(item) }
+  #     }
+  #   end
+
 
   private
 
@@ -140,4 +159,43 @@ class ItemsController < ApplicationController
       total_items: total_items
     }
   end
+
+  # def show_item_amount
+  #   all_amounts = []
+  #   @item.item_amounts.each { |item_amount| all_amounts << item_amount.amount }
+  #   all_amounts.sum
+  # end
+
+  # def get_chart_data
+  #   sorted_exp_date = @item.item_amounts.order(exp_date: :asc)
+  #   not_expired = sorted_exp_date.select {|amount| !amount.checked}
+  #   expiring_next = not_expired.count < 1 ? 0 : not_expired.first.amount
+  #   upcoming = not_expired.count <= 1 ? 0 : not_expired[1].amount
+  #   remaining = not_expired.drop(2)
+  #   remaining_amounts = remaining.map { |remaining_amount| remaining_amount.amount }
+  #   remaining_total = remaining_amounts.sum
+  #   {
+  #     data_values: [expiring_next, upcoming, remaining_total],
+  #     data_keys: ['Expiring next', 'Upcoming', 'Remaining']
+  #   }
+  # end
+
+  # def get_waste_chart_data(exp_amounts)
+  #   #data_values: sort waste log entries by month -> arranged in hash-map
+  #   #data_keys: create months entries based on entries from data_values
+  #   data = []
+  #   sorted_hash = exp_amounts.group_by {|amount| amount.exp_date.strftime("%B")}
+
+  #   sorted_hash.each_key do |month|
+  #     amounts = []
+  #     sorted_hash[month].each do |item|
+  #       amounts << item.amount 
+  #     end
+  #     data << {
+  #             month: month,
+  #             total: amounts.sum
+  #             }
+  #   end
+  #   data
+  # end
 end
