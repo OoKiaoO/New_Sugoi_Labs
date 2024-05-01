@@ -46,16 +46,12 @@ class ItemAmountsController < ApplicationController
   end
 
   def update
-    # @item_amount.update!(item_amount_params)
-
-    if @item_amount.update!(item_amount_params)
+    if !@item_amount.update(item_amount_params)
+      render :edit, status: :unprocessable_entity
+    else
       # log(@item.id, "Updated item's info")
       redirect_to item_path(@item)
-    else
-      render :new, status: :unprocessable_entity
     end
-
-    redirect_to item_path(@item)
   end
 
   def destroy
