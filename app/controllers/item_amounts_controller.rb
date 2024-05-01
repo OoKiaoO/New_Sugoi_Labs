@@ -9,13 +9,23 @@ class ItemAmountsController < ApplicationController
   def create
     @item_amount = ItemAmount.new(item_amount_params)
     @item_amount.item = @item
+    @item_amount.save
 
-    if @item_amount.save!
+    if !@item_amount.save
+      render :new, status: :unprocessable_entity
+    else
       redirect_to item_path(@item)
       # log(@item.id, "Updated item's info")
-    else
-      render :new, status: :unprocessable_entity
     end
+
+    # NB: the code below won't enter the else statement, causing validation errors to not show
+    # if @item_amount.save!
+    #   redirect_to item_path(@item)
+    #   # log(@item.id, "Updated item's info")
+    # else
+    #   raise
+    #   #render :new, status: :unprocessable_entity
+    # end
 
     # respond_to do |format|
     #   if @item_amount.save
@@ -36,12 +46,13 @@ class ItemAmountsController < ApplicationController
   end
 
   def update
-    @item_amount.update!(item_amount_params)
+    # @item_amount.update!(item_amount_params)
 
-    if @item_amount.save
-      log(@item.id, "Updated item's info")
+    if @item_amount.update!(item_amount_params)
+      # log(@item.id, "Updated item's info")
+      redirect_to item_path(@item)
     else
-      render :new
+      render :new, status: :unprocessable_entity
     end
 
     redirect_to item_path(@item)

@@ -3,7 +3,7 @@ class ItemAmount < ApplicationRecord
 
   validates :amount,
             presence: true,
-            numericality: true
+            numericality: { greater_than_or_equal_to: 1 }
   validates :exp_date,
             presence: true
   validates :exp_amount,
