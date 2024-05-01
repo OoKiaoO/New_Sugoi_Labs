@@ -7,9 +7,8 @@
     <p><%= link_to "Manage", edit_item_item_amount_path(item, item_amount) %></p>
     <p><%= link_to "Delete",
           item_amount_path(item_amount),
-          method: :delete,
           id: "item-delete",
-          data: { confirm: "Are you sure?" }
+          data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }
     %></p>
   </div>
 </div>

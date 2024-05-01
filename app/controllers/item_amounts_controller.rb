@@ -56,9 +56,9 @@ class ItemAmountsController < ApplicationController
 
   def destroy
     @item_amount.destroy
-    log(@item_amount.item_id, "Deleted amount: #{@item_amount.amount}")
+    # log(@item_amount.item_id, "Deleted amount: #{@item_amount.amount}")
 
-    redirect_to item_path(@item_amount.item)
+    redirect_to item_path(@item_amount.item), status: :see_other
   end
 
   private
