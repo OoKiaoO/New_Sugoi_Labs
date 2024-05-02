@@ -36,7 +36,7 @@
   <div class="item-stock section">
     <div class="item-stock-info">
       <h1>Stock</h1>
-      <div data-controller="add-item-amount" class="stock-info">
+      <div data-controller="insert-in-list" class="stock-info">
         <div class="add-quantity-form">
           <%= render "item_amounts/new_item_amount_form", item: @item, item_amount: @item_amount %>
         </div>
@@ -47,7 +47,7 @@
           <h3><%= link_to "Remaining", item_path(@item, :option => 'remaining', anchor: "reload") %></h3>
         </div>
 
-        <div data-add-item-amount-target="amounts" class="stock-info-amounts">
+        <div data-insert-in-list-target="amounts" class="stock-info-amounts">
           <% if @unchecked_amounts.empty? %>
             <div class="no-amounts">
               <p>No items in stock!</p>

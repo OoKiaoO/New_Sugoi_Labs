@@ -70,7 +70,7 @@ class ItemsController < ApplicationController
     # @item.save!
 
     if @item.save
-      redirect_to item_path(@item)
+      redirect_to item_path(@item), notice: "Item was succesfully created."
       # log(@item.id, "Created new item")
     else
       render :new, status: :unprocessable_entity
@@ -85,7 +85,7 @@ class ItemsController < ApplicationController
     @item.update(item_params)
 
     if @item.save
-      redirect_to item_path(@item)
+      redirect_to item_path(@item), notice: "Item was succesfully updated."
       # log(@item.id, "Updated item's info")
     else
       render :new, status: :unprocessable_entity

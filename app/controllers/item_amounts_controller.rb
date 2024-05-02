@@ -9,12 +9,12 @@ class ItemAmountsController < ApplicationController
   def create
     @item_amount = ItemAmount.new(item_amount_params)
     @item_amount.item = @item
-    @item_amount.save
+    # @item_amount.save
 
     if !@item_amount.save
       render :new, status: :unprocessable_entity
     else
-      redirect_to item_path(@item)
+      redirect_to item_path(@item), notice: "Amount succesfully added."
       # log(@item.id, "Updated item's info")
     end
 
@@ -29,14 +29,15 @@ class ItemAmountsController < ApplicationController
 
     # respond_to do |format|
     #   if @item_amount.save
-    #     log(@item.id,
-    #         "Added new amount: #{@item_amount.amount}, with expiration date:  #{@item_amount.exp_date}",
-    #         @item_amount.amount,
-    #         @item_amount.exp_date)
+    #     # log(@item.id,
+    #     #     "Added new amount: #{@item_amount.amount}, with expiration date:  #{@item_amount.exp_date}",
+    #     #     @item_amount.amount,
+    #     #     @item_amount.exp_date)
     #     format.html { redirect_to item_path(@item, anchor: "reload") }
     #     format.json # normal Rails flow will look for a file called 'create.json'
     #   else
-    #     format.html { render "items/#{@item.id}", status: :unprocessable_entity }
+    #     format.html { render :new, status: :unprocessable_entity }
+    #     #format.html { render "items/#{@item.id}", status: :unprocessable_entity }
     #     format.json
     #   end
     # end
