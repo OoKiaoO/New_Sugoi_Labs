@@ -69,7 +69,9 @@
         </div>
       <% else %>
         <div class="stock-graph">
-          <canvas id="myChart"
+          <canvas id="stockChart"
+                  data-controller="make-chart"
+                  data-make-chart-target="stockChart"
                   width="200px"
                   height="100px"
                   data-labels="<%= @data_keys %>"
