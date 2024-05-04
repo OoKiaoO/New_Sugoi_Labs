@@ -44,9 +44,9 @@ class ItemsController < ApplicationController
         @data_values = chart_data[:data_values]
         @data_keys = chart_data[:data_keys]
         @exp_amounts = @item.item_amounts.select {|amount| amount.checked}
-        @waste_data = get_waste_chart_data(@exp_amounts)
-        @data_waste_keys = @waste_data.map {|item| item[:month] }
-        @data_waste_values = @waste_data.map {|item| item[:total] }
+        # @waste_data = get_waste_chart_data(@exp_amounts)
+        # @data_waste_keys = @waste_data.map {|item| item[:month] }
+        # @data_waste_values = @waste_data.map {|item| item[:total] }
 
         if params[:option] == 'amount#reload'
           @item_amounts = @item.item_amounts.order(amount: :desc)
@@ -59,6 +59,7 @@ class ItemsController < ApplicationController
         end
       end
     end
+    # raise
   end
 
   def new
