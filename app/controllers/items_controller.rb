@@ -43,10 +43,10 @@ class ItemsController < ApplicationController
         chart_data = get_chart_data
         @data_values = chart_data[:data_values]
         @data_keys = chart_data[:data_keys]
-        @exp_amounts = @item.item_amounts.select {|amount| amount.checked}
-        # @waste_data = get_waste_chart_data(@exp_amounts)
-        # @data_waste_keys = @waste_data.map {|item| item[:month] }
-        # @data_waste_values = @waste_data.map {|item| item[:total] }
+        @exp_amounts = @item.item_amounts.select { |amount| amount.checked}
+        @waste_data = get_waste_chart_data(@exp_amounts)
+        @data_waste_keys = @waste_data.map { |item| item[:month] }
+        @data_waste_values = @waste_data.map { |item| item[:total] }
 
         if params[:option] == 'amount#reload'
           @item_amounts = @item.item_amounts.order(amount: :desc)
@@ -71,7 +71,7 @@ class ItemsController < ApplicationController
     # @item.save!
 
     if @item.save
-      redirect_to item_path(@item), notice: "Item was succesfully created."
+      redirect_to item_path(@item), notice: 'Item was succesfully created.'
       # log(@item.id, "Created new item")
     else
       render :new, status: :unprocessable_entity
@@ -86,7 +86,7 @@ class ItemsController < ApplicationController
     @item.update(item_params)
 
     if @item.save
-      redirect_to item_path(@item), notice: "Item was succesfully updated."
+      redirect_to item_path(@item), notice: 'Item was succesfully updated.'
       # log(@item.id, "Updated item's info")
     else
       render :new, status: :unprocessable_entity
@@ -181,22 +181,22 @@ class ItemsController < ApplicationController
     }
   end
 
-  # def get_waste_chart_data(exp_amounts)
-  #   #data_values: sort waste log entries by month -> arranged in hash-map
-  #   #data_keys: create months entries based on entries from data_values
-  #   data = []
-  #   sorted_hash = exp_amounts.group_by {|amount| amount.exp_date.strftime("%B")}
+  def get_waste_chart_data(exp_amounts)
+    #data_values: sort waste log entries by month -> arranged in hash-map
+    #data_keys: create months entries based on entries from data_values
+    data = []
+    sorted_hash = exp_amounts.group_by {|amount| amount.exp_date.strftime("%B")}
 
-  #   sorted_hash.each_key do |month|
-  #     amounts = []
-  #     sorted_hash[month].each do |item|
-  #       amounts << item.amount 
-  #     end
-  #     data << {
-  #             month: month,
-  #             total: amounts.sum
-  #             }
-  #   end
-  #   data
-  # end
+    sorted_hash.each_key do |month|
+      amounts = []
+      sorted_hash[month].each do |item|
+        amounts << item.amount
+      end
+      data << {
+              month: month,
+              total: amounts.sum
+              }
+    end
+    data
+  end
 end

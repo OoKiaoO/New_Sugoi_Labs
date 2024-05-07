@@ -72,13 +72,54 @@
           <canvas id="stockChart"
                   data-controller="make-chart"
                   data-make-chart-target="stockChart"
-                  width="200px"
-                  
                   data-make-chart-labels-value="<%= @data_keys %>"
                   data-make-chart-data-value="<%= @data_values %>" >
           </canvas>
         </div>
       <% end %>
+    </div>
+  </div>
+
+  <div class="item-logs section">
+    <div class="item-logs-info">
+      <h1 id="waste-log-info">Waste Log</h1>
+      <div class="log-info">
+        <div class="waste-log-info-column-headers">
+          <h3>Quantity</h3>
+          <h3>Exp. Date</h3>
+          <h3>Expired</h3>
+          <h3>Logged Date</h3>
+        </div>
+        <div class="expired">
+          <% if @exp_amounts == nil %>
+            <div class="no-amounts">
+              <p>Yay! No items expired yet.</p>
+            </div>
+          <% else %>
+            <% @exp_amounts.each do |item_amount| %>
+              <%= render 'items/waste_log_amounts', amount: item_amount %>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+
+      <div class="item-waste-chart">
+        <% if @unchecked_amounts.empty? %>
+          <div class="no-amounts">
+            <p>Not enough data to build a chart!</p>
+          </div>
+        <% else %>
+          <div class="stock-graph">
+            <canvas id="wasteChart"
+                    data-controller="waste-chart"
+                    width="900px"
+                    height="600px"
+                    data-waste-chart-labels-value="<%= @data_waste_keys %>"
+                    data-waste-chart-data-value="<%= @data_waste_values %>">
+            </canvas>
+          </div>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>
