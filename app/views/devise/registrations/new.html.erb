@@ -1,0 +1,46 @@
+<div class="container">
+  <div class="logo_container">
+    <div class="logo"></div>
+  </div>
+
+  <% if @user.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+      <ul>
+      <% @user.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+
+    <div class="form-inputs">
+      <%= f.text_field :email,
+                        required: true,
+                        label: false,
+                        autofocus: true,
+                        placeholder: "Your email address here",
+                        :class => "form_input", 
+                        :id => "email_input" %>
+      <%= f.text_field :password,
+                        required: true,
+                        label: false,
+                        placeholder: "Your password here: 6 characters minimum",
+                        :class => "form_input", 
+                        :id => "email_input" %>
+      <%= f.text_field :password_confirmation,
+                        label: false,
+                        required: true,
+                        placeholder: "Confirm your password here",
+                        :class => "form_input" %>
+    </div>
+
+    <div class="form-actions">
+      <%= f.submit "Sign up", :class => "login-signup" %>
+    </div>
+  <% end %>
+
+  <%= render "devise/shared/links" %>
+</div>

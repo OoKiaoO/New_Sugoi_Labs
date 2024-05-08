@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_07_033809) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_08_035955) do
   create_table "activity_logs", force: :cascade do |t|
     t.integer "item_id", null: false
     t.string "action"
@@ -18,9 +18,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_07_033809) do
     t.date "item_amount_exp_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "user_id", null: false
     t.index ["item_id"], name: "index_activity_logs_on_item_id"
-    t.index ["user_id"], name: "index_activity_logs_on_user_id"
   end
 
   create_table "item_amounts", force: :cascade do |t|
@@ -59,7 +57,18 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_07_033809) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  create_table "views", force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["email"], name: "index_views_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_views_on_reset_password_token", unique: true
+  end
+
   add_foreign_key "activity_logs", "items"
-  add_foreign_key "activity_logs", "users"
   add_foreign_key "item_amounts", "items"
 end

@@ -14,8 +14,8 @@ class ItemAmountsController < ApplicationController
     if !@item_amount.save
       render :new, status: :unprocessable_entity
     else
+      log(@item.id, "Updated item's info")
       redirect_to item_path(@item), notice: "Amount succesfully added."
-      # log(@item.id, "Updated item's info")
     end
 
     # NB: the code below won't enter the else statement, causing validation errors to not show
@@ -50,14 +50,14 @@ class ItemAmountsController < ApplicationController
     if !@item_amount.update(item_amount_params)
       render :edit, status: :unprocessable_entity
     else
-      # log(@item.id, "Updated item's info")
+      log(@item.id, "Updated item's info")
       redirect_to item_path(@item)
     end
   end
 
   def destroy
     @item_amount.destroy
-    # log(@item_amount.item_id, "Deleted amount: #{@item_amount.amount}")
+    log(@item_amount.item_id, "Deleted amount: #{@item_amount.amount}")
 
     redirect_to item_path(@item_amount.item), status: :see_other
   end
