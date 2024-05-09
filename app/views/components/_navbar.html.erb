@@ -17,9 +17,7 @@
       <%# <%= link_to "Account", user_path(current_user), class: "nav-link" %>
     </li>
     <li class="dropdown-item">
-      Log out
-      <%# <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
-      </div>
+      <%= link_to "Log out", destroy_user_session_path, data: { turbo_method: :delete }, class: "dropdown-item" %>
     </li>
   </ul>
 </div>

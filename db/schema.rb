@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_08_035955) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_09_035108) do
   create_table "activity_logs", force: :cascade do |t|
     t.integer "item_id", null: false
     t.string "action"
@@ -18,7 +18,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_08_035955) do
     t.date "item_amount_exp_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "user_id", null: false
     t.index ["item_id"], name: "index_activity_logs_on_item_id"
+    t.index ["user_id"], name: "index_activity_logs_on_user_id"
   end
 
   create_table "item_amounts", force: :cascade do |t|
@@ -53,6 +55,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_08_035955) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "username"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
@@ -70,5 +73,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_08_035955) do
   end
 
   add_foreign_key "activity_logs", "items"
+  add_foreign_key "activity_logs", "users"
   add_foreign_key "item_amounts", "items"
 end

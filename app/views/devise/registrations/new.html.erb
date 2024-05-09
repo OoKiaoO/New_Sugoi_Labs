@@ -17,6 +17,13 @@
   <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
 
     <div class="form-inputs">
+      <%= f.text_field :username,
+                        required: true,
+                        label: false,
+                        autofocus: true,
+                        placeholder: "Your username address here",
+                        :class => "form_input", 
+                        :id => "email_input" %>
       <%= f.text_field :email,
                         required: true,
                         label: false,
@@ -27,12 +34,14 @@
       <%= f.text_field :password,
                         required: true,
                         label: false,
+                        autofocus: true,
                         placeholder: "Your password here: 6 characters minimum",
                         :class => "form_input", 
                         :id => "email_input" %>
       <%= f.text_field :password_confirmation,
                         label: false,
                         required: true,
+                        autofocus: true,
                         placeholder: "Confirm your password here",
                         :class => "form_input" %>
     </div>
