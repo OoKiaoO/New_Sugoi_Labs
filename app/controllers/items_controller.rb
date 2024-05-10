@@ -99,24 +99,25 @@ class ItemsController < ApplicationController
     redirect_to items_path, status: :see_other
   end
 
-  # def expiring_soon
-  #   items = Item.all
-  #   current_month = Date.today
-  #   next_month = Date.today.next_month
-  #   next_next_month = Date.today.next_month(2)
+  def expiring_soon
+    items = Item.all
+    current_month = Date.today
+    next_month = Date.today.next_month
+    next_next_month = Date.today.next_month(2)
 
-  #   @current_month_items = get_monthly_items(items, get_monthly_range(current_month))
-  #   @next_month_items = get_monthly_items(items, get_monthly_range(next_month))
-  #   @next_next_month_items = get_monthly_items(items, get_monthly_range(next_next_month))
+    @current_month_items = get_monthly_items(items, get_monthly_range(current_month))
+    @next_month_items = get_monthly_items(items, get_monthly_range(next_month))
+    @next_next_month_items = get_monthly_items(items, get_monthly_range(next_next_month))
 
-  #   if params[:start_date].present? && params[:end_date].present?
-  #     range = (params[:start_date]..params[:end_date])
-  #     @filtered_items = get_monthly_items(items, range)
-  #   elsif params[:monthly_items].present?
-  #     @filtered_items = {
-  #       items: params[:monthly_items].map { |item| Item.find(item) }
-  #     }
-  #   end
+    if params[:start_date].present? && params[:end_date].present?
+      range = (params[:start_date]..params[:end_date])
+      @filtered_items = get_monthly_items(items, range)
+    elsif params[:monthly_items].present?
+      @filtered_items = {
+        items: params[:monthly_items].map { |item| Item.find(item) }
+      }
+    end
+  end
 
 
   private
