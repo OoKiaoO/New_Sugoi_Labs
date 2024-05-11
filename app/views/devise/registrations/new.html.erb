@@ -14,17 +14,17 @@
     </div>
   <% end %>
 
-  <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name), data: { turbo: false }) do |f| %>
 
     <div class="form-inputs">
       <%= f.text_field :username,
                         required: true,
                         label: false,
                         autofocus: true,
-                        placeholder: "Your username address here",
+                        placeholder: "Your username here",
                         :class => "form_input", 
                         :id => "email_input" %>
-      <%= f.text_field :email,
+      <%= f.email_field :email,
                         required: true,
                         label: false,
                         autofocus: true,
