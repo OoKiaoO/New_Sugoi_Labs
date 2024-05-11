@@ -5,7 +5,7 @@
 
   <% if @user.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+      <p><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</p>
       <ul>
       <% @user.errors.full_messages.each do |message| %>
         <li><%= message %></li>
@@ -31,14 +31,14 @@
                         placeholder: "Your email address here",
                         :class => "form_input", 
                         :id => "email_input" %>
-      <%= f.text_field :password,
+      <%= f.password_field :password,
                         required: true,
                         label: false,
                         autofocus: true,
                         placeholder: "Your password here: 6 characters minimum",
                         :class => "form_input", 
                         :id => "email_input" %>
-      <%= f.text_field :password_confirmation,
+      <%= f.password_field :password_confirmation,
                         label: false,
                         required: true,
                         autofocus: true,
