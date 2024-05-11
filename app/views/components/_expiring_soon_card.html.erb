@@ -2,7 +2,7 @@
   <%= link_to item_path(item), class: 'inventory-card-link' do %>
     <div class="link-wrapper">
       <div>
-        <% if item.photo.attached? %>
+        <% if item.has_attribute?("photo") %>
           <%= cl_image_tag item.photo.key, width: 200, height: 200 %>
         <% else %>
           <div class="item-img">
