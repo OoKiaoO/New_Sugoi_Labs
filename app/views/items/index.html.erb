@@ -5,6 +5,7 @@
           <%= form_tag items_path, method: :get, class: "search-form" do %>
             <%= text_field_tag :query,
                         params[:query],
+                        value: "",
                         class: "search-input",
                         placeholder: "Search the inventory" %>   
             <%= submit_tag "", class: "search-submit" %>

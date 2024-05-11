@@ -3,12 +3,14 @@
   <ul class="nav_links">
     <li>
       <div class="search-bar">
-        <%= form_with url: root_path, method: :get, html: { class: 'search-form' } do |f| %>
-          <%= f.text_field :name,
-                      input_html: {value: "", class: "search-input"},
+        <%= form_tag items_path, method: :get, class: 'search-form' do %>
+          <%= text_field_tag :query,
+                      params[:query],
+                      value: "",
+                      class: "search-input",
                       label: false,
                       placeholder: "Search items" %>   
-          <%= f.submit "", class: "search-submit" %>
+          <%= submit_tag "", class: "search-submit" %>
         <% end %>
       </div>
     </li>
