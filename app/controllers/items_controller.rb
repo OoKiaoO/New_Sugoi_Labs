@@ -44,10 +44,9 @@ class ItemsController < ApplicationController
         @data_values = chart_data[:data_values]
         @data_keys = chart_data[:data_keys]
         @exp_amounts = @item.item_amounts.select { |amount| amount.checked}
-        @waste_data = get_waste_chart_data(@exp_amounts)
-        @data_waste_keys = @waste_data.map { |item| item[:month] }
-        @data_waste_values = @waste_data.map { |item| item[:total] }
-
+        @data_waste_keys = get_waste_chart_data(@exp_amounts).map { |item| item[:month] }
+        @data_waste_values = get_waste_chart_data(@exp_amounts).map { |item| item[:total] }
+        
         if params[:option] == 'amount#reload'
           @item_amounts = @item.item_amounts.order(amount: :desc)
         elsif params[:option] == 'exp#reload'
@@ -183,21 +182,23 @@ class ItemsController < ApplicationController
   end
 
   def get_waste_chart_data(exp_amounts)
-    #data_values: sort waste log entries by month -> arranged in hash-map
-    #data_keys: create months entries based on entries from data_values
-    data = []
-    sorted_hash = exp_amounts.group_by {|amount| amount.exp_date.strftime("%B")}
+    # data_values: sort waste log entries by month -> arranged in hash-map
+    # data_keys: create months entries based on entries from data_values
 
-    sorted_hash.each_key do |month|
-      amounts = []
-      sorted_hash[month].each do |item|
-        amounts << item.amount
-      end
-      data << {
-              month: month,
-              total: amounts.sum
-              }
+    # Group entries by both month and year
+    sorted_hash = exp_amounts.group_by { |amount| [amount.exp_date.year, amount.exp_date.strftime('%B')] }
+
+    # Convert month name to month number to facilitate sorting
+    month_mapping = {"January" => 1, "February" => 2, "March" => 3, "April" => 4, "May" => 5,
+    "June" => 6, "July" => 7, "August" => 8, "September" => 9, "October" => 10, "November" => 11, "December" => 12}
+
+    # Prepare the data for the chart, summing amounts for each month-year pair
+    data = sorted_hash.map do |(year, month), amounts|
+      total_amount = amounts.sum { |item| item.exp_amount }
+      { year: year, month: month, total: total_amount }
     end
-    data
+
+    # Sort data by year first, then by month
+    data.sort_by! { |entry| [entry[:year], month_mapping[entry[:month]]] }
   end
 end
