@@ -32,10 +32,10 @@ class ItemsController < ApplicationController
 
   def show
     @item_amount = ItemAmount.new
-    @unchecked_amounts = @item.item_amounts.select {|amount| !amount.checked}
+    @unchecked_amounts = @item.item_amounts.where(checked: nil)
     
-    unless @item.item_amounts.empty?
-      if @item.item_amounts.count == 1
+    unless @unchecked_amounts.empty?
+      if @unchecked_amounts.count == 1
         @item_amounts = @item.item_amounts.order(created_at: :desc)
         @data_values = [@item.item_amounts.first.amount]
         @data_keys = ['Expiring next']
@@ -46,19 +46,19 @@ class ItemsController < ApplicationController
         @exp_amounts = @item.item_amounts.select { |amount| amount.checked}
         @data_waste_keys = get_waste_chart_data(@exp_amounts).map { |item| item[:month] }
         @data_waste_values = get_waste_chart_data(@exp_amounts).map { |item| item[:total] }
-        
-        if params[:option] == 'amount#reload'
-          @item_amounts = @item.item_amounts.order(amount: :desc)
-        elsif params[:option] == 'exp#reload'
-          @item_amounts = @item.item_amounts.order(exp_date: :asc)
-        elsif params[:option] == 'remaining'
-          @item_amounts = @item.item_amounts.order(exp_date: :asc)
+
+        case params[:option]
+        when 'amount'
+          @unchecked_amounts = @unchecked_amounts.order(amount: :desc)
+        when 'exp'
+          @unchecked_amounts = @unchecked_amounts.order(exp_date: :asc)
+        when 'remaining'
+          @unchecked_amounts = @unchecked_amounts.order(exp_date: :asc)
         else
-          @item_amounts = @item.item_amounts.order(created_at: :desc)
+          @unchecked_amounts = @unchecked_amounts.order(created_at: :desc)
         end
       end
     end
-    # raise
   end
 
   def new
